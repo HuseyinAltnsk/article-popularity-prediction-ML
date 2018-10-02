@@ -11,6 +11,7 @@ both articles from “Moreover” and “Opoint”, our two major data sources. 
 with cross-validation. We think that this project can be used to support the media and entertainment industry’s efforts in
 producing contents that generate high volumes of readers, and can help many businesses better understand readers’ interest.
 
+The final paper can be found [here](https://github.com/HuseyinAltnsk/article-popularity-prediction-ML/blob/master/Predicting%20Popularity%20of%20News%20Articles%20Using%20Machine%20Learning.pdf).
 #### Detailed Conclusion
 We used three regression models in the project: linear support vector regression, random forest regressor and lasso regression.
 We set out to build a model that could accurately predict the popularity of news articles in terms of momentum scores. After
