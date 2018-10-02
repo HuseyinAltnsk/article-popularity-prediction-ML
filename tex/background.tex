@@ -1,0 +1,24 @@
+
+\section{Background}
+\label{sec:background}
+
+\subsection{Data Pre-Processing \& Feature Extraction}
+The raw data for this project are stored in two large parent gzip files, ``Moreover" and ``Opoint". The Opoint parent  gzip file originally contained 2679 child gzip files, whereas the Moreover parent file contained 12420 child gzip files. Each child gzip file stores an ``.xml" file. Inside each ``.xml" file we found a  different number of articles, including meta data such as its unique article ID, the author, the source of the article, as well as the article content, which we considered to be our feature for this project. We also had a csv file called ``Momentum" that stores the article IDs as well as its matching momentum scores for some of the articles from our file source. \\
+
+Our first task was to iterate over each article inside the folders and the ``.xml" files ,and consolidate all articles with a momentum score into a new CSV file for model training purposes. To do so, we iterated over all articles inside the Moreover files and extracted the contents for articles with an ``id\_article" that can be found in ``Momentum.csv". For the Opoint files, we iterated over the files and saved contents for articles with a matching ``feed\_article\_id" that exists in the Momentum csv file. We realized after finishing this step that our output csv file had a few empty or unusually structured rows; and since our data size is large enough, we decided to discard those rows. \\
+Because text data cannot be fed directly to the algorithms themselves as most of them expect numerical feature vectors with a fixed size rather than the raw text documents with variable length, we decided to perform feature extraction using the \texttt{TfidfVectorizer}. The \texttt{TfidfVectorizer} takes in individual articles in string formats, tokenizes the article strings into words and gives an integer id for each possible token or word by using white-spaces and punctuation as token separators. The vectorizer then counts the occurrences of tokens in each article and essentially normalizes the dataset.\\
+Through this process, each individual token occurrence frequency (normalized or not) is treated as a feature, and the vector of all the token frequencies for a given document is considered a multivariate sample.
+
+\subsection{Feature Modification}
+We realized at the early stages of our project that for large article texts, some words will be very present (e.g. “the”, “it”, “a” in English) hence carrying very little meaningful information about the actual contents of the article. If we were to feed the data on frequency directly to a model, those very frequent terms would potentially shadow the frequencies of rarer yet more interesting terms. Hence, we defined a list of stop words prior to running any models. Our list of words looks like this: ['the', 'a', 'is','are','for','that','as','it','to','be'].\\
+Later in our experiments, it occurred to us that our CSV files had many duplicated articles with the exact same contents. For example, our sample size before we deleted any duplicates for articles from Moreover was $2354$, and after we dropped all samples that have the same titles, we had only $1164$ samples left. We will discuss our results later in this paper.  
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+
+\section{Models \& Experiments}
+\label{sec:expts}
+For this project, we decided to use the following three models:
+\subsection{Linear SVR}
+  Short for Linear Support Vector Regression, this model is similar to the Support Vector Regression model, with the parameter kernel = `linear'. According to \texttt{scikit-learn}, \texttt{LinearSVR} is implemented in terms of liblinear rather than libsvm, hence it has more flexibility for the choice of penalties and loss functions, and can scale better to large numbers of samples. 
+  \begin{itemize}
+      \item Hyperparameters
+  \begin{enumerate}
+    \item C parameter (default = $1.0$)\\
+    For this model, we first ran 10-folds cross validation on the C parameter, which stands for penalty for the error term. We implemented the model with L2 penalty. Since the bigger the C value, the less regularization is used, we expected to see an improvement in model performance as C increased.
+    \item loss (default = L1)\\
+    The default setting for the loss function is L1, the ``epsilon-insensitive" loss. After getting poor cross validation performance from this setting, we changed the loss setting to be L2, the ``squared epsilon-insensitive". Following this tuning, we immediately saw a significant increase in our model results.
+    \end{enumerate}
+    \item Result Metric\\
+    For LinearSVR, we looked at the r2 score as an indication of model performance. The r2 score is a statistic measure that tells the fitness of a model. A score of $1$ indicates that the regression line perfectly fits the data. \\
+ \end{itemize}
+\subsection{Random Forest Regressor}
+This model creates a diverse set of classifiers by introducing randomness in the tree construction process. Because of such randomness, we expected the bias and variance of this model to be slightly higher. The model fits a number of decision trees on the sub-samples of the data set, and uses averaging to improve accuracy scores and to prevent over-fitting. Therefore, we expected it to yield an overall well-performed model. 
+\begin{itemize}
+      \item Hyperparameters
+  \begin{enumerate}
+    \item n\_estimators (default = $10$)\\
+    This represents the number of trees in a forest. We ran CV on this parameter first with values $[5,10,15,20,25]$, then with $[50,100,150,200,250]$, on top of the 10-folds cross validation we also performed on the model.
+    \item max\_features (default = n\_features)\\
+    This indicates the number of features to consider when looking for the best split. For our project, we first set max\_feature to be the number of features we have for each article: the number of columns in our data frame. We also tried setting it to be 'sqrt' and 'log2', in which case max\_features=sqrt(n\_features) and max\_features=log2(n\_features).
+    \item max\_depth (default = None)\\
+    This parameter represents the maximum depth of the tree. We left this setting as it was, because we wanted for all the nodes to expand till all leaves are pure. 
+     \item min\_samples\_split (default = 2)\\
+    This stands for the minimum number of samples required to split an internal node. We also used the default setting of $2$.
+    \end{enumerate}
+    \item Result Metric\\
+    The performance of the Random Forest Regression was also measured using r2 scores.\\
+ \end{itemize}
+\subsection{Lasso Regression}
+ Lasso is a regularization technique that works by penalizing the magnitude of feature coefficients to minimize the amount of error between the predictions and actual observations. Lasso performs L1 regularization, which is the sum of the weights in the loss function. Lasso shrinks the less important feature’s coefficient to zero, which works well for feature selection when we have a huge number of features as in our case. 
+\begin{itemize}
+    \item Hyper-parameters
+\begin{enumerate}
+    \item alpha \\
+    The alpha parameter is a constant value that is multiplied by the L1 term. The higher the alpha value, the stronger the penalization. If the alpha value is $0$, the Lasso regression will result in the same coefficients as a linear regression \cite{ChrisAlbon}. The alpha values we tuned for this projects were $[0.001,0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.5,1,2,5]$.
+  \end{enumerate}
+  \item Result Metric\\
+     The Lasso Regression performance was calculated using the r2 scores. 
+
+ \end{itemize}
+ In the next section, we will discuss our results for the models. 
+  
+  

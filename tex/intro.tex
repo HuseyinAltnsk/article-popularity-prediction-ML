@@ -1,0 +1,25 @@
+
+% The \section{} command formats and sets the title of this
+% section. We'll deal with labels later.
+\section{Introduction}
+\label{sec:intro}
+
+About fifty years ago, reading in paper copies through subscriptions was the only choice for many families. However, as technology advances, digital reading has gained tremendous popularity among the younger generations. According to the Fortune Magazine, today $85\%$ adults in the US read news on their mobile devices. Therefore, it is in news medias' commercial interests to know which of their articles generate the most attention from the readers.\\ 
+
+For this project, we set out to use machine learning techniques to predict popularity of a news article based on its text content. Our dataset contains over $12000$ articles from different websites, covering a wide range of topics. Some articles have a ``momentum" score, which signals its popularity among readers. The momentum scores range from $0$ to $6448.06$; for this project, we assumed that the higher the momentum score, the more popular the article. To turn our source data into usable feature data for this project, we performed text data pre-processing using \texttt{pandas}, as well as feature extraction using \texttt{TfidfVectorizer} from the \texttt{scikit-learn} library\cite{scikit-learn}. We then trained our models using \texttt{scikit-learn}'s built-in \texttt{LinearSVR}, \texttt{RandomForestRegressor}, and \texttt{Lasso Regression} models on articles that carry momentum scores. We will explain in greater details for each step in later sections, including our results in model performances.\\
+
+In the next section, we will talk about preparing our data prior to training them on any models. 
+
+% Citations: As you can see above, you create a citation by using the
+% \cite{} command. Inside the braces, you provide a "key" that is
+% uniue to the paper/book/resource you are citing. How do you
+% associate a key with a specific paper? You do so in a separate bib
+% file --- for this document, the bib file is called
+% project1.bib. Open that file to continue reading...
+
+% Note that merely hitting the "return" key will not start a new line
+% in LaTeX. To break a line, you need to end it with \\. To begin a 
+% new paragraph, end a line with \\, leave a blank
+% line, and then start the next line (like in this example).
+
+
